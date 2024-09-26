@@ -1,0 +1,36 @@
+<odoo>
+    <data>
+        <!-- Define the API base URL parameter -->
+        <record id="api_base_url_parameter" model="ir.config_parameter">
+            <field name="key">api_base_url</field>
+            <field name="value">http://localhost:3000/api</field>
+        </record>
+
+        <record id="api_base" model="ir.config_parameter">
+            <field name="key">api_base</field>
+            <field name="value">http://localhost:5000/api</field>
+        </record>
+
+        <!-- Define status parameters -->
+        <record id="status_sent_parameter" model="ir.config_parameter">
+            <field name="key">status_sent</field>
+            <field name="value">sent</field>
+        </record>
+        <record id="status_pending_parameter" model="ir.config_parameter">
+            <field name="key">status_pending</field>
+            <field name="value">pending</field>
+        </record>
+        <record id="status_sent_parameter" model="ir.config_parameter">
+            <field name="key">status_forward</field>
+            <field name="value">forwarded</field>
+        </record>
+        <record id="status_pending_parameter" model="ir.config_parameter">
+            <field name="key">status_delete</field>
+            <field name="value">delete</field>
+        </record>
+        <record id="status_pending_parameter" model="ir.config_parameter">
+            <field name="key">status_important</field>
+            <field name="value">important</field>
+        </record>
+    </data>
+</odoo>

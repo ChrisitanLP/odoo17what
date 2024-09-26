@@ -1,0 +1,99 @@
+<odoo>
+    <data>
+        <template id="messages_template">
+            <div class="messages">
+                <div class="back-to-chats-btn">
+                    <button>Regresar a Chats</button>
+                </div>
+
+                <div class="chat-banner-container">
+                    <!-- El banner del chat se añadirá aquí con JS -->
+                </div>
+                <div id="messages-container">
+                    <div class="chat-messages">
+                        <!-- Los mensajes se añadirán aquí con JS -->
+                    </div>
+                </div>
+
+                <div class="scroll-to-bottom-btn" id="scroll-to-bottom" style="display: none;">
+                    <button><i class="fa fa-chevron-down"></i></button>
+                </div>
+
+                <div id="attend-button-container">
+                    <button id="attend-btn" class="attend-button">Atender</button>
+                </div>
+
+                <div id="input-disabled-container">
+                    <p class="input-disabled-p">Este chat está siendo atendido por otro usuario.</p>
+                </div>
+
+                <div id="reply-container" class="reply-container" style="display: none;">
+                    <div id="reply-message">
+                        <span id="reply-name"></span>
+                        <span id="reply-text"></span>
+                        <button id="cancel-reply-btn"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+
+                <div id="message-input-container">
+                    <button id="emoji-btn"><i class="fa fa-smile-o message-icon" aria-hidden="true"></i></button>
+                    <button id="sticker-btn"><i class="fa fa-sticky-note message-icon" aria-hidden="true"></i></button>
+                    <button id="plus-btn"><i class="fa fa-plus message-icon" aria-hidden="true"></i></button>
+                    <input type="text" id="message-input" placeholder="Escribe un mensaje"/>
+                </div>
+
+                <div id="lightbox_messages_whatsapp">
+                    <div id="lightbox" class="lightbox" style="display: none;">
+                        <span id="lightbox-close" class="lightbox-close"><i class="fa fa-times"></i></span>
+                        <div id="lightbox-info" class="lightbox-info"></div>
+                        <img class="lightbox-content" id="lightbox-img"/>
+                        <p id="lightbox-text" class="lightbox-text"></p>
+                        <button id="prev-img" class="lightbox-nav"><i class="fa fa-chevron-left"></i></button>
+                        <button id="next-img" class="lightbox-nav"><i class="fa fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <t t-call="whatsapp_message_api.emoji_picker"/>
+                <t t-call="whatsapp_message_api.sticker_picker"/>
+                <t t-call="whatsapp_message_api.plus_picker"/>
+
+                <div id="file-preview" class="file-preview">
+                    <button id="close-file-preview" class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    <div class="file-preview-content">
+                        <img id="preview-image" src="" alt="Preview" style="display: none;"/>
+                        <video id="preview-video" style="display: none;"></video>
+                        <div id="preview-document" style="display: none;"></div>
+                        <textarea id="file-message" placeholder="Agrega un comentario..."></textarea>
+                        <button id="send-file"><i class="fa fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+            <script type="text/javascript" src="/whatsapp_message_api/static/src/js/load_message.js"></script>
+        </template>
+
+        <!-- Picker de emojis -->
+        <template id="emoji_picker">
+            <div id="emoji-picker" class="emoji-picker">
+                <div class="emoji-picker-body" id="emoji-picker-body">
+                </div>
+            </div>
+        </template>
+
+        <!-- Picker de stickers -->
+        <template id="sticker_picker">
+            <div id="sticker-picker" class="sticker-picker">
+                <div class="sticker-picker-body" id="sticker-picker-body">
+                </div>
+            </div>
+        </template>
+
+        <!-- Picker del botón "plus" -->
+        <template id="plus_picker">
+            <div id="plus-picker">
+                <div class="plus-picker-body" id="plus-picker-body">
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

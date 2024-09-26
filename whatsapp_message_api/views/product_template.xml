@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+        <template id="products_template">
+            <div class="products">
+                <button id="close-products-btn-section" class="close-btn-section"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i><span>Regresar a Mensajes</span></button>
+                <div class="search-container-products">
+                    <i class="fa fa-search search-icon"></i>
+                    <input type="text" id="search-input-products" placeholder="Buscar Productos..."/>
+                </div>
+                <div class="products-grid">
+                    <t t-foreach="products" t-as="product">
+                        <div class="product-item" t-att-data-product-id="product.id">
+                            <div class="color-line"/>
+                            <div class="product-pic">
+                                <img t-att-src="'/web/image/product.template/' + str(product.id) + '/image_1920'" 
+                                     alt="Product Image"/>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-name">
+                                    <t t-esc="product.name"/>
+                                </div>
+                                <div class="product-price">
+                                    <t t-esc="product.list_price"/> $
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

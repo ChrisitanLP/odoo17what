@@ -1,0 +1,105 @@
+<odoo>
+    <data>
+        <template id="chats_template">
+            <div class="chats">
+                <!-- Sección de chats atendidos (arriba) -->
+                <h4>Chats Atendidos</h4>
+                <hr/>
+                <div class="seccion-superior">
+                    <t t-foreach="chats.filtered(lambda c: c.status == 'atendiendo' and c.user_attending_id.id == request.env.user.id)" t-as="chat">
+                        <div class="chat-item" t-att-data-chat-id="chat.id" t-att-style="'border-left: 5px solid ' + (chat.user_id.connection_id.color or '#cccccc')">
+                            <div class="profile-pic" t-att-data-chat-id="chat.id">
+                                <img t-att-src="chat.profile_pic_url or 'https://cdn.playbuzz.com/cdn/913253cd-5a02-4bf2-83e1-18ff2cc7340f/c56157d5-5d8e-4826-89f9-361412275c35.jpg'" alt="Profile Picture"/>
+                            </div>
+                            <div class="chat-info">
+                                <div class="chat-name">
+                                    <t t-esc="chat.name"/>
+                                </div>
+                            </div>
+                            <div class="chat-close-icon" t-att-data-chat-id="chat.id">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                            </div>
+                            <div class="chat-ready-icon" t-att-data-chat-id="chat.id">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+                <h4>Chats Pendientes</h4>
+                <hr/>
+                <!-- Sección de chats pendientes (abajo) -->
+                <div class="seccion-inferior">
+                    <t t-foreach="chats.filtered(lambda c: c.status == 'pendiente')" t-as="chat">
+                        <div class="chat-item" t-att-data-chat-id="chat.id" t-att-style="'border-left: 5px solid ' + (chat.user_id.connection_id.color or '#cccccc')">
+                            <div class="profile-pic">
+                                <img t-att-src="chat.profile_pic_url or 'https://cdn.playbuzz.com/cdn/913253cd-5a02-4bf2-83e1-18ff2cc7340f/c56157d5-5d8e-4826-89f9-361412275c35.jpg'" alt="Profile Picture"/>
+                            </div>
+                            <div class="chat-info">
+                                <div class="chat-name">
+                                    <t t-esc="chat.name"/>
+                                </div>
+                                <div class="last-message" t-att-class="chat.unread_count > 0 and 'highlighted' or ''">
+                                    <!-- Lógica para verificar URL al inicio del mensaje -->
+                                    <t t-if="chat.last_message_body.startswith('https://') or chat.last_message_body.startswith('http://')">
+                                        <i class="fa fa-link message-icon" aria-hidden="true"></i>
+                                        <span>URL</span>
+                                    </t>
+                                    <!-- Lógica para otros tipos de mensajes -->
+                                    <t t-if="chat.last_message_type == 'image'">
+                                        <i class="fa fa-image message-icon" aria-hidden="true"></i>
+                                        <span>Image</span>
+                                    </t>
+                                    <t t-if="chat.last_message_type == 'sticker'">
+                                        <i class="fa fa-sticky-note message-icon" aria-hidden="true"></i>
+                                        <span>Sticker</span>
+                                    </t>
+                                    <t t-if="chat.last_message_type == 'location'">
+                                        <i class="fa fa-map-marker message-icon" aria-hidden="true"></i>
+                                        <span>Ubicación</span>
+                                    </t>
+                                    <t t-if="chat.last_message_type == 'video'">
+                                        <i class="fa fa-video-camera message-icon" aria-hidden="true"></i>
+                                        <span>Video</span>
+                                    </t>
+                                    <t t-if="chat.last_message_type == 'vcard'">
+                                        <i class="fa fa-address-card message-icon" aria-hidden="true"></i>
+                                        <span>Contacto</span>
+                                    </t>
+                                    <t t-if="chat.last_message_type == 'document'">
+                                        <i class="fa fa-file message-icon" aria-hidden="true"></i>
+                                        <span>Document</span>
+                                    </t>
+                                    <t t-if="chat.last_message_type == 'ptt'">
+                                        <i class="fa fa-microphone message-icon" aria-hidden="true"></i>
+                                        <span>Audio</span>
+                                    </t>
+                                    <t t-if="chat.last_message_type == 'audio'">
+                                        <i class="fa fa-microphone message-icon" aria-hidden="true"></i>
+                                        <span>Audio</span>
+                                    </t>
+                                    <t t-if="chat.last_message_type == 'revoked'">
+                                        <i class="fa fa-ban message-icon" aria-hidden="true"></i>
+                                        <span>Mensaje Eliminado</span>
+                                    </t>
+                                    <t t-if="chat.last_message_type == 'groups_v4_invite'">
+                                        <i class="fa fa-users message-icon" aria-hidden="true"></i>
+                                        <span>Invitación de Grupo</span>
+                                    </t>
+                                    <!-- Mensaje por defecto si no es ninguno de los anteriores -->
+                                    <t t-if="not (chat.last_message_body.startswith('https://') or chat.last_message_body.startswith('http://')) and chat.last_message_type not in ['image', 'sticker', 'document', 'revoked', 'ptt', 'location', 'vcard', 'audio', 'groups_v4_invite']">
+                                        <span>
+                                            <t t-esc="chat.last_message_body[:35] + ('...' if len(chat.last_message_body) > 35 else '')"/>
+                                        </span>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="unread-count" t-if="chat.unread_count > 0">
+                                <t t-esc="chat.unread_count"/>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

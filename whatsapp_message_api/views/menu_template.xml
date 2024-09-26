@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+        <!-- Acción que redirige a la ruta -->
+        <record id="action_whatsapp_api" model="ir.actions.act_url">
+            <field name="name">WhatsApp Chats</field>
+            <field name="url">/menu_opciones</field>
+            <field name="target">self</field>
+        </record>
+
+        <!-- Menú principal -->
+        <menuitem id="menu_whatsapp_api" name="WhatsApp API" sequence="10" action="action_whatsapp_api"/>
+    </data>
+</odoo>

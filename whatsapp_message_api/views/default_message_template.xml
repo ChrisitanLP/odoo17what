@@ -1,0 +1,108 @@
+<odoo>
+    <data>
+        <template id="default_messages_template">
+            <div class="default-messages">
+                <button id="close-default-messages-btn-section" class="close-btn-section"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i><span>Regresar a Mensajes</span></button>
+
+                <div class="modal fade modal-message" id="add-message-modal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" id="modal-dialog-message" role="document">
+                        <div class="modal-content" id="modal-content-message">
+                            <div class="modal-header" id="modal-header-message">
+                                <h5 class="modal-title" id="modal-title-message">Mensajes por Defecto</h5>
+                                <button type="button" class="close" id="header-close-modal" aria-label="Close">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="modal-body-message">
+                                <form id="add-message-form">
+                                    <div class="form-row-message">
+                                        <div class="form-group-message">
+                                            <label for="message-name">Descripción:</label>
+                                            <input type="text" class="form-control" id="message-name" />
+                                        </div>
+                                        <div class="form-group-message">
+                                            <label for="message-type">Tipo:</label>
+                                            <select class="form-control" id="message-type">
+                                                <option value="">Selecciona un tipo</option>
+                                                <option value="text">Texto</option>
+                                                <option value="location">Ubicación</option>
+                                                <option value="image">Imagen</option> <!-- Cambiado de código a imagen -->
+                                                <option value="document">Documento</option> <!-- Cambiado de PDF a Documento -->
+                                                <option value="web_page">Página Web</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group-message" id="message-content-group">
+                                        <label for="message-content">Contenido:</label>
+                                        <textarea class="form-control" id="message-content" rows="3"></textarea>
+                                    </div>
+                                    <div class="form-group-message" id="pdf-file-group" style="display: none;">
+                                        <label for="pdf-file">Archivo:</label> <!-- Etiqueta generalizada -->
+                                        <input type="file" class="form-control" id="pdf-file" accept=".pdf,.jpg,.png,.jpeg" /> <!-- Soporta imágenes también -->
+                                    </div>
+                                    <div class="form-group-message" id="location-group" style="display: none;">
+                                        <label for="latitude">Latitud:</label>
+                                        <input type="text" class="form-control" id="latitude" />
+                                        <label for="longitude">Longitud:</label>
+                                        <input type="text" class="form-control" id="longitude" />
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer" id="modal-footer-message">
+                                <button type="button" class="btn-message btn-secondary-message" id="footer-close-modal">Cerrar</button>
+                                <button type="button" class="btn-message btn-primary-message" id="save-message-btn">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="messages-grid">
+                    <t t-foreach="messages" t-as="message">
+                        <div class="message-item" t-att-data-message-id="message.id">
+                            <div class="color-line" t-att-style="'background-color: #e0ca04'"/>
+                            <div class="send-icon" t-att-data-message-id="message.id">
+                                <i class="fa fa-paper-plane"></i>
+                            </div>
+                            <div class="message-info">
+                                <div class="message-name">
+                                    <t t-esc="message.name"/>
+                                </div>
+                                <div class="message-type">
+                                    <t t-if="message.type == 'text'">
+                                        <t t-esc="message.text"/>
+                                    </t>
+                                    <t t-if="message.type == 'location'">
+                                        <a t-att-href="'https://www.google.com/maps?q=' + str(message.location_latitude) + ',' + str(message.location_longitude)" target="_blank">
+                                            Ver ubicación
+                                        </a>
+                                    </t>
+                                    <t t-if="message.type == 'code'">
+                                        <pre><t t-esc="message.code"/></pre>
+                                    </t>
+                                    <t t-if="message.type == 'pdf'">
+                                        <t t-esc="message.file_name"/>
+                                    </t>
+                                    <t t-if="message.type == 'web_page'">
+                                        <a t-att-href="message.web_url" target="_blank">
+                                            Ver página
+                                        </a>
+                                    </t>
+                                </div>
+                            </div>
+                            <button class="close-btn">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </t>
+                </div>
+
+                <div class="add-message-btn">
+                    <button id="add-message-btn" class="btn btn-primary">
+                        <i class="fa fa-plus message-icon" aria-hidden="true"></i> 
+                    </button>
+                </div>
+                
+            </div>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+      <template id="chats_and_contacts_template">
+        <t t-call="website.layout">
+          <t t-call="web.layout">
+            <header id="header_whatsapp">
+              <div class="custom-header">
+                <div class="header-logo">
+                  <img src="\whatsapp_message_api\static\src\img\wallpaper\image-removebg-preview.png" alt="Logo" class="custom-logo"/>
+                  <span class="header-title">Whatsapp API</span>
+                </div>
+                <nav class="custom-nav">
+                  <ul class="nav-icons">
+                    <li><button id="chat-messages-btn"><i class="fa fa-commenting-o"></i></button></li> 
+                    <li><button id="contacts-btn"><i class="fa fa-address-book"></i></button></li>
+                    <li><button id="products-btn"><i class="fa fa-tags"></i></button></li>
+                    <li><button id="messages-btn"><i class="fa fa-comments"></i></button></li>
+                  </ul>
+                </nav>
+              </div>
+            </header>
+            <div id="chats_messages_contacts_whatsapp">
+              <div class="oe_structure chats-and-contacts-container">
+                  <t t-call="whatsapp_message_api.chats_template"/>
+                  <t t-call="whatsapp_message_api.messages_template"/>
+                  <div id="dynamic-template"></div>
+              </div>
+            </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+            <script type="text/javascript" src="/whatsapp_message_api/static/src/js/pages.js"></script>
+            <script type="text/javascript" src="/whatsapp_message_api/static/src/js/emojis.js"></script>
+            <script type="text/javascript" src="/whatsapp_message_api/static/src/js/stickers.js"></script>
+            <script type="text/javascript" src="/whatsapp_message_api/static/src/js/documents.js"></script>
+            <script type="text/javascript" src="/whatsapp_message_api/static/src/js/websocket_integration.js"></script>
+          </t>
+        </t>
+      </template>
+    </data>
+</odoo>

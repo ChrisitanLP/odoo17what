@@ -1,0 +1,99 @@
+<odoo>
+    <data>
+        <template id="contacts_template">
+            
+            <div class="contacts">
+                <button id="close-contacts-btn-section" class="close-btn-section"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i><span>Regresar a Mensajes</span></button>
+                <div class="search-container">
+                    <i class="fa fa-search search-icon"></i>
+                    <input type="text" id="search-input" placeholder="Buscar Contactos..."/>
+                </div>
+                <div class="contacts-grid">
+                    <t t-foreach="contacts" t-as="contact">
+                        <div class="contact-item" t-att-data-contact-id="contact.id" t-att-data-color-contact="contact.user_id.connection_id.color" >
+                            <div class="color-line" t-att-style="'background-color: ' + (contact.user_id.connection_id.color or '#ccc')"/>
+                            <div class="profile-pic"
+                            t-att-data-contact-id="contact.id"
+                            t-att-data-serialized="contact.serialized"
+                            t-att-data-user-id="contact.user_id.id"
+                            t-att-data-phone-number="contact.phone_number">
+                                <img t-att-src="contact.profile_pic_url or 'https://cdn.playbuzz.com/cdn/913253cd-5a02-4bf2-83e1-18ff2cc7340f/c56157d5-5d8e-4826-89f9-361412275c35.jpg'" alt="Profile Picture"/>
+                            </div>
+                            <div class="contact-info">
+                                <div class="contact-name">
+                                    <t t-esc="contact.name"/>
+                                </div>
+                                <div class="contact-phone">
+                                    <t t-esc="contact.phone_number"/>
+                                </div>
+                                <div class="contact-user">
+                                    <t t-esc="contact.user_id.display_name"/>
+                                </div>
+                            </div>
+                            <div class="contact-plus-icon">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+                <div class="add-contact-btn">
+                    <button id="add-contact-btn" class="btn btn-primary">
+                        <i class="fa fa-plus message-icon" aria-hidden="true"></i> 
+                    </button>
+                </div>
+            </div>
+
+                <div class="modal fade modal-contact" id="add-contact-modal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" id="modal-dialog-contact" role="document">
+                        <div class="modal-content" id="modal-content-contact">
+                            <div class="modal-header" id="modal-header-contact">
+                                <h5 class="modal-title" id="modal-title-contact">Añadir Contacto</h5>
+                                <button type="button" class="close" id="header-close-modal-contact" aria-label="Close">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="modal-body-contact">
+                                <form id="add-contact-form">
+                                    <div class="form-group-contact">
+                                        <label for="contact_name">Nombre Contacto:</label>
+                                        <input type="text" class="form-control" id="contact_name" name="name" />
+                                    </div>
+                                    <div class="form-row-contact">
+                                        <div class="form-group-contact">
+                                            <label for="contact-country_code">Código de País:</label>
+                                            <select id="contact-country_code" class="form-control">                                               
+                                                <option value="54">Argentina (+54)</option>
+                                                <option value="57">Colombia (+57)</option>
+                                                <option value="593">Ecuador (+593)</option>
+                                                <option value="34">España (+34)</option>
+                                                <option value="1">Estados Unidos (+1)</option>
+                                                <option value="52">México (+52)</option>
+                                                <option value="52">Perú (+51)</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group-contact" id="message-content-group">
+                                            <label for="contact_phone_number">Teléfono:</label>
+                                            <input type="text" class="form-control" id="contact_phone_number" minlength="9" maxlength="9" name="phone_number" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 9);"/>
+                                            <small id="phone-error" class="form-text text-danger" style="display: none;">Ingrese un número de teléfono válido.</small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group-contact">
+                                        <label for="contact_user">Seleccionar Usuario:</label>
+                                        <select id="contact_user" class="form-control">
+                                            <option value="">Seleccionar Usuario</option>
+                                            <!-- Los usuarios se agregarán dinámicamente -->
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer" id="modal-footer-contact">
+                                <button type="button" class="btn-contact btn-secondary-contact" id="footer-close-modal-contact">Cerrar</button>
+                                <button type="button" class="btn-contact btn-primary-contact" id="save-contact-btn">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </template>
+    </data>
+</odoo>

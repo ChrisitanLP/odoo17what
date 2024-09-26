@@ -1,0 +1,131 @@
+<odoo>
+    <data>
+        <template id="whatsapp_autentication">
+            <t t-call="website.layout">
+                    <div id="authentication_whatsapp"> 
+                        <div class="whatsapp-auth-container">
+                            <div class="connection-list">
+                                <button class="open-modal-btn-connection">
+                                    <i class="fa fa-plus-circle message-icon" aria-hidden="true"></i> 
+                                    <span class="text-white">Agregar Conexión</span>
+                                </button>
+                                <table class="connections">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nombre</th>
+                                            <th>Teléfono</th>
+                                            <th>Color</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Inyectar las conexiones dinámicamente -->
+                                        <t t-foreach="connections" t-as="connection">
+                                            <tr t-att-data-connection-id="connection.id">
+                                                <td t-esc="connection.id"/>
+                                                <td t-esc="connection.name"/>
+                                                <td t-esc="connection.phone_number"/>
+                                                <td>
+                                                    <span class="color-box" t-att-style="'background-color: ' + connection.color"></span>
+                                                </td>
+                                                <td>
+                                                    <button class="open-modal-btn-qr" t-att-data-phone="connection.phone_number">
+                                                        <i class="fa fa-qrcode" aria-hidden="true"></i>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button class="open-modal-btn-delete" t-att-data-connection-id="connection.id" id="btn_delete_conecction">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                                <a href="/api/whatsapp">
+                                    <button class="ir_principal_page">
+                                        <i class="fa fa-desktop message-icon" aria-hidden="true"></i> 
+                                        <span class="text-white">Pagina Principal</span>
+                                    </button>
+                                </a>
+                            </div>
+                            
+                            <!-- Modal -->
+                            <div class="modal-qr" id="qr-modal">
+                                <div class="modal-content-qr">
+                                    <span class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                    <div class="qr-container">
+                                        <div class="qr-code-section">
+                                            <div id="qr-code-div" class="qr-code-img"></div>
+                                            <p class="qr-instructions">Escanea este código con tu aplicación WhatsApp para sincronizar.</p>
+                                        </div>
+                                        <div class="qr-info-section">
+                                            <h2>Para usar WhatsApp en tu computadora con ODOO:</h2>
+                                            <ol>
+                                                <li>Abre WhatsApp en tu teléfono.</li>
+                                                <li>Toca <strong>Menú</strong> en Android o <strong>Ajustes</strong> en Iphone.</li>
+                                                <li>Toca <strong>Dispositivos vinculados</strong> y, luego, <strong>Vincular un dispositivo.</strong></li>
+                                                <li>Apunta tu teléfono hacia esta pantalla para escanear el código QR.</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                            <div class="modal fade modal-connection" id="connection-modal" tabindex="-1" role="dialog" aria-labelledby="connectionModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" id="modal-dialog-connection" role="document">
+                                    <div class="modal-content" id="modal-content-connection">
+                                        <div class="modal-header" id="modal-header-connection">
+                                            <h5 class="modal-title" id="modal-title-connection">Agregar Nueva Conexión</h5>
+                                            <button type="button" class="close-connection" id="close-modal-connection" aria-label="Close">
+                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body" id="modal-body-connection">
+                                            <form id="connection-form">
+                                                <div class="form-group-connection">
+                                                    <label for="connection_name">Nombre Conexión:</label>
+                                                    <input type="text" class="form-control" id="connection_name" name="name" />
+                                                </div>
+                                                <div class="form-row-connection">
+                                                    <div class="form-group-connection">
+                                                        <label for="country_code">Código de País:</label>
+                                                        <select id="country_code" class="form-control">
+                                                            <option value="593">Ecuador (+593)</option>
+                                                            <option value="1">Estados Unidos (+1)</option>
+                                                            <option value="57">Colombia (+57)</option>
+                                                            <option value="52">México (+52)</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group-connection">
+                                                        <label for="connection_phone_number">Teléfono:</label>
+                                                        <input type="text" class="form-control" id="connection_phone_number" minlength="9" maxlength="9" name="phone_number" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 9);"/>
+                                                        <small id="phone-error" class="form-text text-danger" style="display: none;">Ingrese un número de teléfono válido.</small>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group-connection">
+                                                    <label for="connection_color">Color:</label>
+                                                    <input type="color" class="form-control" id="connection_color" name="color" value="#cccccc"/>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer" id="modal-footer-connection">
+                                            <button type="button" class="btn-connection btn-secondary-connection" id="close-modal-connection">Cerrar</button>
+                                            <button type="button" class="btn-connection btn-primary-connection" id="save-connection">Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
+                    <script type="text/javascript" src="/whatsapp_message_api/static/src/js/authentication.js"></script>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,480 @@
+
+#authentication_whatsapp{
+    .whatsapp-auth-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 98vh;
+        background: linear-gradient(to bottom, #00BFA5 50%, #F0F0F0 50%);
+    }
+
+    .qr-container {
+        display: flex;
+        justify-content: space-between;
+        background-color: white;
+        padding: 3.125rem;
+        border-radius: 10px;
+        max-width: 62.5rem;
+        width: 100%;
+    }
+
+    .qr-code-section {
+        text-align: center;
+        flex: 1;
+    }
+
+    .qr-code-img {
+        width: 16.875rem; 
+        height: 16.875rem;
+        border-radius: 10px;
+        margin-bottom: 1.5625rem;
+        padding: 1.2vh;
+        justify-content: center;
+    }
+
+    .qr-instructions {
+        font-size: 1em;
+        color: #555;
+    }
+
+    .qr-info-section {
+        flex: 1;
+        margin-left: 3.125rem;
+    }
+
+    .qr-info-section h2 {
+        color: #128C7E;
+        font-size: 1.5em;
+        margin-bottom: 1.25rem;
+    }
+
+    .qr-info-section ol {
+        padding-left: 1.25rem;
+        font-size: 1.1em;
+        color: #555;
+    }
+
+    .qr-info-section ol li {
+        margin-bottom: 0.625rem;
+    }
+
+    .modal-qr {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content-qr {
+        background-color: #ffffff;
+        margin: 5% auto;
+        padding: 10px;
+        width: 100%;
+        max-width: 90vh;
+        border-radius: 10px;
+    }
+
+    .close-btn {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close-btn:hover, 
+    .close-btn:focus{
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .modal-connection {
+        display: none; 
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    #modal-dialog-connection {
+        margin: 5% auto;
+        width: 80%;
+        max-width: 31.875rem; /* Ajusta según sea necesario */
+    }
+
+    #modal-content-connection {
+        background-color: #fff;
+        padding: 1.25rem;
+        border-radius: 8px;
+    }
+
+    #modal-header-connection, #modal-footer-connection {
+        padding: 0.9375rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #modal-header-connection {
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    #modal-title-connection {
+        font-size: 1.25rem;
+        margin: 0;
+    }
+
+    .close-connection {
+        background: none;
+        border: none;
+        color: #aaa;
+        font-size: 1.5rem;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close-connection:hover,
+    .close-connection:focus {
+        color: #000;
+        text-decoration: none;
+    }
+
+    #modal-body-connection {
+        padding: 1.25rem 0.9375rem;
+    }
+
+    #modal-footer-connection {
+        border-top: 1px solid #e5e5e5;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .btn-connection {
+        padding: 0.625rem 1.25rem;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 5px;
+    }
+
+    .btn-secondary-connection {
+        background-color: #6c757d;
+        color: #fff;
+    }
+
+    .btn-primary-connection {
+        background-color: #18b9a7;
+        color: #fff;
+    }
+
+    .btn-secondary-connection:hover,
+    .btn-primary-connection:hover {
+        opacity: 0.9;
+    }
+
+    .form-row-connection {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 0.9375rem;
+    }
+
+    .form-group-connection {
+        flex: 1; 
+        min-width: 12.5rem; 
+        margin-right: 0.9375rem;
+    }
+
+    .form-group-connection:last-child {
+        margin-right: 0;
+    }
+
+    .form-group-connection label {
+        display: block; 
+        font-weight: bold;
+        margin-bottom: 0.3125rem; 
+    }
+
+    .form-group-connection input,
+    .form-group-connection select {
+        width: 100%; 
+    }
+
+
+    /* Estilos para el contenedor de conexiones */
+    .whatsapp-auth-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 3.75rem);
+        background: linear-gradient(to bottom, #00BFA5 50%, #F0F0F0 50%);
+    }
+
+    /* Estilos para el botón de agregar conexión */
+    .open-modal-btn-connection {
+        display: inline-flex;
+        align-items: center;
+        background-color: #18b9a7;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 20px;
+        transition: background-color 0.3s ease;
+    }
+
+    .open-modal-btn-connection:hover {
+        background-color: #149182;
+    }
+
+    .open-modal-btn-connection .message-icon {
+        margin-right: 10px;
+    }
+
+    /* Estilos para la tabla de conexiones */
+    .connections {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .connection-list{
+        background-color: #f0f2f5;
+        max-width: calc(100vh - 60px);
+        max-height: calc(100vh - 60px);
+        padding: 5vh;
+        border-radius: 7px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .connections thead {
+        background-color: #f4f4f4;
+    }
+
+    .connections th, .connections td {
+        padding: 3vh;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .connections th {
+        background-color: #18b9a7;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .connections td {
+        font-size: 16px;
+    }
+
+    .connections td .color-box {
+        display: inline-block;
+        width: 44px;
+        align-items: center;
+        height: 44px;
+        border-radius: 50%;
+    }
+
+    /* Estilos para el botón QR dentro de la tabla */
+    .open-modal-btn-qr {
+        display: inline-flex;
+        align-items: center;
+        background-color: #16ad9c;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        transition: background-color 0.3s ease;
+    }
+
+    .open-modal-btn-qr:hover {
+        background-color: #118577;
+    }
+
+    .open-modal-btn-qr i {
+        padding: 5px;
+        font-size: 27px;
+        color: #ffffff;
+    }
+
+    .open-modal-btn-qr i:hover {
+        color: #DDD;
+    }
+
+
+    /* Estilos para el botón QR dentro de la tabla */
+    .open-modal-btn-delete {
+        display: inline-flex;
+        align-items: center;
+        background-color: #ad2016;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        transition: background-color 0.3s ease;
+    }
+
+    .open-modal-btn-delete:hover {
+        background-color: #851511;
+    }
+
+    .open-modal-btn-delete i {
+        padding: 5px;
+        font-size: 27px;
+        color: #ffffff;
+    }
+
+    .open-modal-btn-delete i:hover {
+        color: #DDD;
+    }
+
+    .active-connection{
+        color: #00BFA5;
+        font-weight: bold;
+        font-size: 16px;
+        justify-items: center;
+    }
+
+
+    /* Estilos para el botón de agregar conexión */
+    .ir_principal_page {
+        display: inline-flex;
+        align-items: center;
+        background-color: #18b9a7;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 20px;
+        transition: background-color 0.3s ease;
+    }
+
+    .ir_principal_page:hover {
+        background-color: #149182;
+    }
+
+    .ir_principal_page .message-icon {
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    #authentication_whatsapp {
+        .qr-container {
+            flex-direction: column;
+            padding: 2rem;
+            max-width: 100%;
+        }
+
+        .connection-list{
+            max-width: 80vh!important;
+            padding: 3vh!important;
+        }
+
+        .qr-code-section,
+        .qr-info-section {
+            margin: 0;
+            flex: 1;
+            width: 100%;
+            text-align: center;
+        }
+
+        .qr-code-img {
+            width: 12.5rem; /* Ajusta el tamaño según sea necesario */
+            height: 12.5rem;
+            margin: 0 auto 20px auto;
+        }
+
+        .qr-info-section h2 {
+            font-size: 1.25em;
+        }
+
+        .qr-info-section ol {
+            font-size: 0.95em;
+            padding-left: 0;
+            list-style-position: inside;
+        }
+
+        .modal-content-qr {
+            width: 90%;
+            max-width: 90%;
+        }
+
+        #modal-dialog-connection {
+            width: 90%;
+            max-width: 100%;
+        }
+
+        #modal-content-connection {
+            padding: 1rem;
+        }
+
+        .form-row-connection {
+            flex-direction: column;
+        }
+
+        .form-group-connection {
+            width: 100%;
+            margin-right: 0;
+        }
+
+        .connections {
+            font-size: 0.9rem;
+        }
+
+        .connections th,
+        .connections td {
+            padding: 0.7rem;
+        }
+
+        .connections th{
+            padding-top: 0.95rem;
+            padding-bottom: 1rem;
+        }
+
+        .open-modal-btn-connection,
+        .ir_principal_page {
+            width: 50%;
+            justify-content: center;
+            font-size: 0.98rem;
+            padding: 0.7rem;
+        }
+
+        .open-modal-btn-qr,
+        .open-modal-btn-delete {
+            width: 35px;
+            height: 35px;
+            font-size: 20px;
+        }
+
+        .open-modal-btn-delete i{
+            font-size: 1rem;
+        }
+
+        .open-modal-btn-qr i{
+            font-size: 1rem;
+        }
+    }
+}

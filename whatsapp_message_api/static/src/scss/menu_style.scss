@@ -1,0 +1,113 @@
+
+#custom_menu_whatsapp{
+    .custom_landing_page_options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: calc(98vh - 60px);
+
+        .landing_section_options {
+            display: flex; // Añadido para que los contenidos internos también usen Flexbox
+            flex-direction: column;
+            justify-content: center; // Centra el contenido verticalmente
+            align-items: center; // Centra el contenido horizontalmente
+            width: 50%;
+            height: 100vh;
+            padding: 2rem;
+            text-align: center;
+
+            h1 {
+                font-size: 2.5rem;
+                font-weight: bold;
+                margin-bottom: 1rem;
+            }
+
+            p {
+                font-size: 1.2rem;
+                margin-bottom: 2rem;
+            }
+
+            a {
+                display: inline-block;
+                padding: 1rem 2rem;
+                font-size: 1rem;
+                font-weight: bold;
+                text-transform: uppercase;
+                border-radius: 5px;
+                text-decoration: none;
+                transition: background-color 0.3s ease;
+            }
+
+            &.left_section_options {
+                background-color: #00BFA5; // Color azul
+
+                h1{
+                    color: #ffffff;
+                }
+
+                p{
+                    color: #ffffff;
+                }
+
+                .btn_explore_options {
+                    background-color: #128c7e;
+                    color: #ffffff;
+
+                    &:hover {
+                        background-color: #0e6d62;
+                    }
+                }
+            }
+
+            &.right_section_options {
+                background-color: #f0f2f5; // Color rosado
+
+                h1{
+                    color: #383636;
+                }
+
+                p{
+                    color: #383636;
+                }
+
+                .btn_connect_options {
+                    background-color: #18b9a7;
+                    color: #fff;
+
+                    &:hover {
+                        background-color: #159485;
+                    }
+                }
+            }
+        }
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center;
+            min-height: 98vh!important;
+
+            .landing_section_options {
+                width: 100%;
+                padding: 1.5rem;
+                
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                h1 {
+                    font-size: 2rem;
+                }
+
+                p {
+                    font-size: 1rem;
+                }
+
+                a {
+                    padding: 0.8rem 1.5rem;
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
+}

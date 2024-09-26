@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+        <template id="custom_landing_page" name="Custom Landing Page">
+            <t t-call="website.layout">
+                <div id="custom_menu_whatsapp">
+                    <div class="custom_landing_page_options">
+                        <div class="landing_section_options left_section_options">
+                            <h1>¿Listo para utilizar la aplicación?</h1>
+                            <p>Explora nuestras funcionalidades</p>
+                            <a href="/api/whatsapp" class="btn_explore_options">VER MÁS</a>
+                        </div>
+                        <div class="landing_section_options right_section_options">
+                            <h1>Genera una conexión</h1>
+                            <p>Inicia sesión con tu número</p>
+                            <a href="/whatsapp/connections" class="btn_connect_options">CONECTARSE</a>
+                        </div>
+                    </div>
+                </div>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script type="text/javascript" src="/whatsapp_message_api/static/src/js/options_menu.js"></script>
+            </t>
+        </template>
+    </data>
+</odoo>

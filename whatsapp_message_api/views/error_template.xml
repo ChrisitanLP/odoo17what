@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <!-- Plantilla para mostrar el mensaje de error 404 -->
+        <template id="error_template">
+            <t t-call="website.layout">
+                <div class="error-container-api">
+                    <div class="error-content-api">
+                        <div class="error-image-api">
+                            <img src="\whatsapp_message_api\static\src\img\wallpaper\404.png" alt="404 Error Image"/>
+                        </div>
+                        <h1 class="error-title-api">404</h1>
+                        <h3 class="error-message-api">Información no disponible</h3>
+                        <p class="error-description-api">
+                            No pudimos cargar los datos desde la API.<br/>
+                            Por favor, verifica tu conexión o intenta recargar la página.<br/>
+                            Si el problema persiste, contacta con el administrador del sitio.
+                        </p>
+                        <p class="error-additional-info" t-esc="error_message"></p>
+                    </div>
+                </div>
+                <script type="text/javascript" src="/whatsapp_message_api/static/src/js/error.js"></script>
+            </t>
+        </template>
+    </data>
+</odoo>
